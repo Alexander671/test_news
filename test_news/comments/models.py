@@ -1,9 +1,9 @@
 from django.db import models
 from news.models import News
-class Comment(models.Model): # Таблица комментариев которая наследует models.Model
+class Comments(models.Model): # Таблица комментариев которая наследует models.Model
     
     # текст комментария
-    category_text = models.TextField() # Текст комментария
+    comment_text = models.TextField() # Текст комментария
     
     # родительский комментарий
     parent = models.ForeignKey('self',models.SET_NULL, unique=False, blank=True, null=True)
