@@ -38,9 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+<<<<<<< HEAD
     'news',
     'mptt',
     'commentary'
+||||||| fd5c6b0
+    'news'
+=======
+    'news',
+    'comments'
+>>>>>>> 5dcb18161bcf619c669215bd5281e573a1a0c122
 ]
 
 MIDDLEWARE = [

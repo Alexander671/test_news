@@ -21,7 +21,13 @@ class Comments(models.Model): # Таблица комментариев кото
         verbose_name = ("Category") # человекочитаемое имя объекта
         verbose_name_plural = ("Categories")  #человекочитаемое множественное имя для Комментариев
     def __str__(self):
+<<<<<<< HEAD:test_news/commentary/models.py
         return self.comment_text  # __str__ применяется для отображения объекта в интерфейсе
 
     class MPTTMeta:
          order_insertion_by = ['comment_text']
+||||||| fd5c6b0:test_news/comments/models.py
+        return self.comment_text  # __str__ применяется для отображения объекта в интерфейсе
+=======
+        return self.comment_text  # __str__ применяется для отображения объекта в интерфейсе
+>>>>>>> 5dcb18161bcf619c669215bd5281e573a1a0c122:test_news/comments/models.py
