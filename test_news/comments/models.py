@@ -15,4 +15,4 @@ class Comments(models.Model): # Таблица комментариев кото
         verbose_name = ("Category") # человекочитаемое имя объекта
         verbose_name_plural = ("Categories")  #человекочитаемое множественное имя для Комментариев
     def __str__(self):
-        return self.category_text  # __str__ применяется для отображения объекта в интерфейсе
+        return self.comment_text  # __str__ применяется для отображения объекта в интерфейсе
