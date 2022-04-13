@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<b>{{ new.name }}</b> <br>
+   {{ new.new_text}}<br>
+   {{ new.date_of_create}}<br>
+   {{ new.autor}}<br><br>
+
+<!-- Комментарии -->
+{% load mptt_tags %}
+<ul>
+    {% recursetree comments %}
+        <li>
+            {{ node.comment_text }}
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+   
+<!-- Создать комментарий к статье, 
+    не к другому комментарию   -->
+
+   <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit"> Ответить </button>
+ </form>
+
+<!-- Список комментариев, 
+    на любой комментарий можно ответить 
+
+    {% for comment in comments %}
+    {{ comment.text }}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit"> Ответить </button>
+     </form>
+    {% endfor %}
+   
+    -->
+{% endblock %}

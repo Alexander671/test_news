@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<form method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{ form.as_p }}
+       <button type="submit"> Создать новость </button>
+</form>
+
+
+<ul>
+{% for new in news %}
+<b>	<a class="navbar-item" href="{{new.id}}"> {{ new.name }} <a></b> <br>
+   {{ new.new_text}}<br>
+   {{ new.date_of_create}}<br>
+   {{ new.autor}}<br>
+
+    
+    ------------------------------<p>
+{% endfor %}
+    </ul>
+
+{% endblock %}
