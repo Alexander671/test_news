@@ -2,8 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from requests import get
+
 from .models import News
 from .form import NewsForm
+
+from comments.form import CommentsForm
+from comments.models import Comments
 
 import environ
 
@@ -12,9 +16,15 @@ class NewsView(TemplateView):
     template_name = 'tokens/create.html'
     
     def get(self, request, *args, **kwargs):
-        form = NewsForm()
+        
+        # получение всех новостей и создание формы
+        new_form = NewsForm()
         news = News.objects.all()
-        return render(request, 'news/get.html', {'form' : form, 'news' : news})
+        
+        # получение всех комментариев к статье и создание формы    
+#        comment_form = CommentsForm()
+#        comments = Comments.objects.filter(new = news)
+        return render(request, 'news/get.html', {'form' : new_form, 'news' : news, 'comment_form' : comment_form, 'comments' : comments})
 
 
     def post(self, request):

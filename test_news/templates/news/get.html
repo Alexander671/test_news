@@ -14,13 +14,18 @@
 <b>{{ new.name }}</b> <br>
    {{ new.new_text}}<br>
    {{ new.date_of_create}}<br>
-    
-        
-    {% if new.images %}
-        <p><img src="{{new.images.url}}"></p>
-    {% else %}
-        <p></p>
-    {% endif %}
+   {{ new.autor}}<br>
+   
+    Комментарии: <br>
+    {% for comment in comments %}
+    {{ comment.text }}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit"> Ответить </button>
+     </form>
+     
+    {% endfor %}
     
     ------------------------------<p>
 {% endfor %}
