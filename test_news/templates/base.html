@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+  <title> Новостное приложение </title>
+</head>
+<body>
+        	<div class="navbar-start">
+
+			{% if user.is_authenticated %}
+  				Hi {{ user.username }}!
+  				<a href="{% url 'logout' %}">Log Out</a></p>
+			{% else %}
+  				<p>You are not logged in
+				<a href="{% url 'signup' %}">Sign Up</a>
+				or  
+				<a href="{% url 'login' %}">Log In</a><p>
+
+			{% endif %}
+			
+			<a class="navbar-item" href="/news"> Новости </a><p>
+						
+        	</div>
+         </div>
+	</nav>
+<!-- в блок контент мы будем подгружать наши странички -->
+{% block content %}
+
+
+{% endblock %}
+</div>
+</body>
+</html>
