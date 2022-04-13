@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<form method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{ form.as_p }}
+       <button type="submit"> Создать новость </button>
+</form>
+
+
+<ul>
+{% for new in news %}
+<b>{{ new.name }}</b> <br>
+   {{ new.new_text}}<br>
+   {{ new.date_of_create}}<br>
+    
+        
+    {% if new.images %}
+        <p><img src="{{new.images.url}}"></p>
+    {% else %}
+        <p></p>
+    {% endif %}
+    
+    ------------------------------<p>
+{% endfor %}
+    </ul>
+
+{% endblock %}
