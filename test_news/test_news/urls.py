@@ -1,5 +1,4 @@
 
-from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from django.urls.conf import re_path
@@ -14,7 +13,7 @@ urlpatterns = [
     # создание, получение новостей
     # отдельной новости
     path('news/<int:pk>/', oneNewView.as_view(), name = 'OneNew'),
-    path('news', NewsView.as_view(), name="News"),
+    path('news', NewsView.as_view(), name = 'News'),
 
 
     # роутинг авторизации

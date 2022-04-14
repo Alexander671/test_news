@@ -7,41 +7,96 @@
    {{ new.date_of_create}}<br>
    {{ new.autor}}<br><br>
 
-<!-- Комментарии -->
+<!-- Дерево комментариев
+    в работе библиотека mptt -->
 {% load mptt_tags %}
 <ul>
+    
     {% recursetree comments %}
+        
         <li>
+            <!-- Создаем список из деревьев
+                **магия mptt** -->
             {{ node.comment_text }}
+
+            <!-- Кнопка с классом btn -->
+            <button class="btn" id="btn--{{node.id}}" type="button">
+                Ответить
+            </button>
+
+            <!-- Класс скрытой формы -->
+            <div class="content" id="content--{{node.id}}">
+            
+            Ответ на комментарий: <br>
+            {{node}}
+                <form  method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <button type="submit"> Отправить ответ </button>
+                 </form>
+            
+            </div>
+
+            <style type="text/css">
+                  
+                  
+                  
+                  .content {
+                    display: none;
+                  }
+                  
+
+                  .content--visible {
+                      display: block;
+                  }
+                                    
+            </style>
+
+           
+
             {% if not node.is_leaf_node %}
                 <ul class="children">
                     {{ children }}
+                    
                 </ul>
             {% endif %}
         </li>
     {% endrecursetree %}
+    <script>
+        //var a = "{{node.id}}"
+        //var btn = document.querySelector(".btn" + a);
+        //var content = document.querySelector(".content"  + a);
+        const buttons = document.querySelectorAll(".btn")
+        
+        //buttons.addEventListener("click", btnClick);
+        console.log(buttons);
+        
+        buttons.forEach((button) => button.addEventListener("click", btnClick));
+
+        function btnClick(e) {
+            console.log(e.target.id);
+            
+            const buttonId = e.target.id.split("--")[1]
+            const content = document.querySelector(`#content--${buttonId}`)
+            content.classList.toggle("content--visible")
+            
+            console.log(content);
+            
+            //btn.textContent = "Ответить";
+        
+            //content.classList.toggle("hidden");
+        }
+    </script>
 </ul>
    
 <!-- Создать комментарий к статье, 
-    не к другому комментарию   -->
+    не к другому комментарию   
 
    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ comment_form.as_p }}
     <button type="submit"> Ответить </button>
  </form>
+-->
 
-<!-- Список комментариев, 
-    на любой комментарий можно ответить 
-
-    {% for comment in comments %}
-    {{ comment.text }}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <button type="submit"> Ответить </button>
-     </form>
-    {% endfor %}
-   
-    -->
 {% endblock %}

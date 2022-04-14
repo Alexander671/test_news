@@ -11,7 +11,7 @@
 
 <ul>
 {% for new in news %}
-<b>	<a class="navbar-item" href="{{new.id}}"> {{ new.name }} <a></b> <br>
+<b>	<a class="navbar-item" href="/news/{{new.id}}"> {{ new.name }} <a></b> <br>
    {{ new.new_text}}<br>
    {{ new.date_of_create}}<br>
    {{ new.autor}}<br>

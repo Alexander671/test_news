@@ -12,17 +12,17 @@ from commentary.models import Comments
 
 import environ
 
-
+from mptt.forms import MoveNodeForm
 class oneNewView(TemplateView):
     # получение всех новостей 
     def get(self, request, pk, *args, **kwargs):
         new = News.objects.get(id = pk)
 
         # получение всех комментариев к статье и создание формы    
-        comment_form = CommentsForm()
-        comments = Comments.objects.filter(new = pk)
-        print(comments)
-        return render(request, 'news/get1.html', {'new' : new, 'comment_form' : comment_form, 'comments' : comments})
+        form_comment = CommentsForm()
+        comments = Comments.objects.filter(new = new)
+        return render(request, 'news/get1.html', {'new' : new, 'comment_form' : form_comment, 'comments' : comments})
+    
     def post(self, request, pk, *args, **kwargs):
         form_comment = CommentsForm(request.POST)
         form_empty = CommentsForm()
@@ -37,7 +37,7 @@ class oneNewView(TemplateView):
             req.new           = new
             req.save()
             
-        return render(request, 'news/get.html', {'new' : new, 'comment_form' : form_empty, 'comments' : comments})
+        return render(request, 'news/get1.html', {'new' : new, 'comment_form' : form_empty, 'comments' : comments})
 
 
 
@@ -47,10 +47,10 @@ class NewsView(TemplateView):
     def get(self, request, *args, **kwargs):
         
         # получение всех новостей и создание формы
-        new_form = NewsForm()
+        form_new = NewsForm()
         news = News.objects.all()
         
-        return render(request, 'news/get.html', {'form' : new_form, 'news' : news})
+        return render(request, 'news/get.html', {'form' : form_new, 'news' : news})
 
 
     def post(self, request):
