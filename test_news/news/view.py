@@ -12,7 +12,8 @@ from commentary.models import Comments
 
 import environ
 
-from mptt.forms import MoveNodeForm
+
+
 class oneNewView(TemplateView):
     # получение всех новостей 
     def get(self, request, pk, *args, **kwargs):
@@ -80,4 +81,5 @@ class NewsView(TemplateView):
             req.save()
             
         return render(request, 'news/get.html', {'form' : form_empty, 'news' : news})
+
 
