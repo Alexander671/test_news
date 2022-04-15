@@ -40,7 +40,7 @@ pip==22.0.4          </br>
 **Additionally:**
 - × Using PostgreSQL.
 - ✓ docker-compose to run api and database.
-- ✓ Swagger or other API documentation.
+- × Swagger or other API documentation.
 
 
 
