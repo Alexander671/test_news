@@ -74,9 +74,9 @@ nano .env
 ```
 
 ```
-SECRET_KEY = 
-DEBUG = 
-ALLOWED_HOSTS = 
+SECRET_KEY = <your_secret_key>
+DEBUG = <True/False>
+ALLOWED_HOSTS = <list_hosts>
 
 ```
 
@@ -120,9 +120,9 @@ nano .env
 ```
 
 ```
-SECRET_KEY = 
-DEBUG = 
-ALLOWED_HOSTS = 
+SECRET_KEY = <your_secret_key>
+DEBUG = <True/False>
+ALLOWED_HOSTS = <list_hosts>
 
 ```
 
