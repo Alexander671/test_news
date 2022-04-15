@@ -8,4 +8,4 @@ class CommentsForm(ModelForm):
     
     class Meta:
         model = Comments
-        fields = ['comment_text']
+        fields = '__all__'

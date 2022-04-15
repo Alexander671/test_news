@@ -24,9 +24,17 @@ class oneNewView(TemplateView):
         return render(request, 'news/get1.html', {'new' : new, 'comment_form' : form_comment, 'comments' : comments})
     
     def post(self, request, pk, *args, **kwargs):
+
+        # форма которую мы получили 
         form_comment = CommentsForm(request.POST)
+        
+        # очистка формы
         form_empty = CommentsForm()
+        
+        # поиск новостей по id
         new = News.objects.get(id = pk)
+        
+        # комментарии которые относятся к этой статье
         comments = Comments.objects.filter(new = new)
 
         if form_comment.is_valid():
@@ -54,14 +62,21 @@ class NewsView(TemplateView):
 
 
     def post(self, request):
+        
+        # форма которую мы получили 
         form = NewsForm(request.POST)
+
+        # отчистка формы
         form_empty = NewsForm()
+
+        # все новости
         news = News.objects.all()
         
         if form.is_valid():
             
             # save params
             req = form.save(commit=False)
+            req.autor         = request.user
             req.save()
             
         return render(request, 'news/get.html', {'form' : form_empty, 'news' : news})

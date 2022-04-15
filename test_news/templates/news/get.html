@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
+<!-- Форма создания новой новости -->
 <form method="post" enctype="multipart/form-data">
        {% csrf_token %}
        {{ form.as_p }}
@@ -10,7 +10,10 @@
 
 
 <ul>
-{% for new in news %}
+
+<!-- Все новости -->
+
+    {% for new in news %}
 <b>	<a class="navbar-item" href="/news/{{new.id}}"> {{ new.name }} <a></b> <br>
    {{ new.new_text}}<br>
    {{ new.date_of_create}}<br>

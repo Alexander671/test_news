@@ -18,42 +18,48 @@
             <!-- Создаем список из деревьев
                 **магия mptt** -->
             {{ node.comment_text }}
-
+            
+            <font color="gray">
+            [{{node.comment_autor}}]
+            </font>
             <!-- Кнопка с классом btn -->
             <button class="btn" id="btn--{{node.id}}" type="button">
                 Ответить
             </button>
 
-            <!-- Класс скрытой формы -->
+            <!-- Класс скрытой формы, которая открывается
+                 при нажатие на кнопку Ответить class = btn -->
             <div class="content" id="content--{{node.id}}">
             
-            Ответ на комментарий: <br>
-            {{node}}
+            <b>Ответ на комментарий:</b> <br>
+            <i>{{node}}</i>
+                
                 <form  method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ comment_form.as_p }}
-                    <button type="submit"> Отправить ответ </button>
+                    {{ comment_form.comment_text }}
+                    <!-- Два дополнительных скрытых поля, которые берутся 
+                        из комментария на который дает ответ -->
+                    <input id="id_new" type="hidden" name="new" value={{new.id}} /></p>
+                    <input id="id_parent" type="hidden" name="parent" value={{node.id}} /></p>
+                
+                    <button type="submit"> Отправить </button>
                  </form>
             
             </div>
 
             <style type="text/css">
                   
-                  
-                  
                   .content {
                     display: none;
                   }
-                  
 
                   .content--visible {
                       display: block;
                   }
                                     
             </style>
-
-           
-
+          
+            
             {% if not node.is_leaf_node %}
                 <ul class="children">
                     {{ children }}
@@ -62,13 +68,11 @@
             {% endif %}
         </li>
     {% endrecursetree %}
+
+    <!-- Скрипт управления кнопкой -->
     <script>
-        //var a = "{{node.id}}"
-        //var btn = document.querySelector(".btn" + a);
-        //var content = document.querySelector(".content"  + a);
         const buttons = document.querySelectorAll(".btn")
         
-        //buttons.addEventListener("click", btnClick);
         console.log(buttons);
         
         buttons.forEach((button) => button.addEventListener("click", btnClick));
@@ -82,21 +86,20 @@
             
             console.log(content);
             
-            //btn.textContent = "Ответить";
-        
-            //content.classList.toggle("hidden");
         }
     </script>
 </ul>
    
 <!-- Создать комментарий к статье, 
-    не к другому комментарию   
+    не к другому комментарию   -->
 
    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ comment_form.as_p }}
-    <button type="submit"> Ответить </button>
+    {{ comment_form.comment_text }}
+
+
+    <input id="id_new" type="hidden" name="new" value={{new.id}} /></p>
+    <button type="submit"> Комментарий </button>
  </form>
--->
 
 {% endblock %}
