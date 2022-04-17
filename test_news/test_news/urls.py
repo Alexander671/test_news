@@ -12,8 +12,8 @@ from .view import redirect_view
 urlpatterns = [
     # создание, получение новостей
     # отдельной новости
-    re_path('news/<int:pk>/', oneNewView.as_view(), name = 'OneNew'),
-    re_path('news/', NewsView.as_view(), name = 'News'),
+    path('news/<int:pk>/', oneNewView.as_view(), name = 'OneNew'),
+    path('news/', NewsView.as_view(), name = 'News'),
     path('',  NewsView.as_view(), name = 'News'),
 
 
